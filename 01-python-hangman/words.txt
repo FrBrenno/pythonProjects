@@ -1,0 +1,10 @@
+snake
+eagle
+owl
+starfish
+rat
+lizard
+sheep
+fish
+bird
+bee
