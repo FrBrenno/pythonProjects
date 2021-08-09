@@ -70,27 +70,40 @@ def game():
 
         print("Your guesses were: ",  guesses)
         letter = input('Your guess: ').strip().lower()
+        
+        if letter.isalpha():
 
-        body.ch_status(len(guesses))
+            body.ch_status(len(guesses))
 
-        if letter in set_word:
-            """Verify that the letter entered is in the word set, remove it from there, and two cases are available:
-            this letter is multiple times in the word, so we have to get all indexes, put them in a list and replace the right element of the correct_lst with
-            the correct letter. The second case is easier, we just have to put the letter in the correct place in the string.
-            After all, all lists are trasncripted to string to be showed in the screen.            
-            """
-            set_word.remove(letter)
-            if word.count(letter) !=1:
-                indexes = [index for index, i in enumerate(list(word)) if i == letter]
-                for i in indexes:
-                    correct_lst[i] = letter
-                print(' '.join(correct_lst))
+            if letter in set_word:
+                """Verify that the letter entered is in the word set, remove it from there, and two cases are available:
+                this letter is multiple times in the word, so we have to get all indexes, put them in a list and replace the right element of the correct_lst with
+                the correct letter. The second case is easier, we just have to put the letter in the correct place in the string.
+                After all, all lists are trasncripted to string to be showed in the screen.            
+                """
+                set_word.remove(letter)
+                if word.count(letter) !=1:
+                    indexes = [index for index, i in enumerate(list(word)) if i == letter]
+                    for i in indexes:
+                        correct_lst[i] = letter
+                    print(' '.join(correct_lst))
+                else:
+                    correct_lst[word.index(letter)] = letter
+                    print(' '.join(correct_lst))
             else:
-                correct_lst[word.index(letter)] = letter
-                print(' '.join(correct_lst))
-        else:
-            """If the letter is not in the word, add it to guesses list as a error."""
-            guesses.append(letter)
+                """If the letter is not in the word, add it to guesses list as a error."""
+                guesses.append(letter)
+
+        elif letter.isalnum():
+            if letter == '0':
+                exit()
+            else:
+                print("\n")
+                print("Please, you have to enter a letter, not a number.")
+        else: 
+            print("\n")
+            print("You entered a not correct key, please enter a letter.")
+
 
         if body.dead_status:
             """If the player lose the game"""
@@ -118,7 +131,7 @@ def game():
             print('\./'*35)
             print('\n')
             menu()
-    
+        
 
 
 menu()
