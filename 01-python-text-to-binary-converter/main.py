@@ -1,8 +1,9 @@
 from math import log2
 
-def DecimalToBinary(num):
+def DecimalToBinary(num, last = 0):
+
     if num >= 1:
-        DecimalToBinary(num // 2)
+        DecimalToBinary(num // 2, last)
     print(num % 2, end = '')
 
 
